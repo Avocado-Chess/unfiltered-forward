@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Us — Unfiltered Forward</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,600;1,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --black: #0a0a0a;
+      --white: #f5f0e8;
+      --red: #e8321a;
+      --yellow: #f5c518;
+      --gray: #1e1e1e;
+      --mid: #3a3a3a;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    /* ── NOISE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 999;
+      opacity: 0.4;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      padding: 2rem 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: 'SPEAK';
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(120px, 25vw, 320px);
+      color: var(--red);
+      opacity: 0.05;
+      position: absolute;
+      bottom: -2rem;
+      right: -2rem;
+      line-height: 1;
+      pointer-events: none;
+      letter-spacing: -4px;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      animation: fadeDown 0.8s ease both;
+    }
+
+    .logo {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--yellow);
+    }
+
+    .nav-tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      color: var(--mid);
+      text-transform: uppercase;
+    }
+
+    .hero-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 2rem;
+      max-width: 900px;
+      animation: fadeUp 1s ease 0.2s both;
+    }
+
+    .hero-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.3em;
+      color: var(--red);
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .hero-label::before {
+      content: '';
+      display: inline-block;
+      width: 2rem;
+      height: 1px;
+      background: var(--red);
+    }
+
+    h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(60px, 12vw, 150px);
+      line-height: 0.9;
+      letter-spacing: -1px;
+      color: var(--white);
+    }
+
+    h1 span {
+      color: var(--red);
+      display: block;
+    }
+
+    .hero-sub {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      max-width: 520px;
+      color: #a89f8f;
+      font-weight: 300;
+    }
+
+    .hero-bottom {
+      display: flex;
+      align-items: center;
+      gap: 3rem;
+      padding-bottom: 1rem;
+      animation: fadeUp 1s ease 0.5s both;
+    }
+
+    .stat {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+
+    .stat-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.5rem;
+      color: var(--yellow);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      color: var(--mid);
+      text-transform: uppercase;
+    }
+
+    .divider-v {
+      width: 1px;
+      height: 3rem;
+      background: var(--mid);
+    }
+
+    /* ── SECTION BASE ── */
+    section {
+      padding: 6rem 3rem;
+    }
+
+    .section-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.35em;
+      color: var(--red);
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .section-label::before {
+      content: '';
+      display: inline-block;
+      width: 1.5rem;
+      height: 1px;
+      background: var(--red);
+    }
+
+    /* ── ORIGIN ── */
+    .origin {
+      background: var(--gray);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .origin::before {
+      content: '"';
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 40vw;
+      color: var(--black);
+      position: absolute;
+      top: -10%;
+      left: -5%;
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .origin-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    .origin-heading {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(48px, 6vw, 90px);
+      line-height: 0.95;
+      letter-spacing: -1px;
+      position: sticky;
+      top: 3rem;
+    }
+
+    .origin-heading span {
+      color: var(--yellow);
+    }
+
+    .origin-body {
+      display: flex;
+      flex-direction: column;
+      gap: 1.8rem;
+    }
+
+    .origin-body p {
+      font-size: 1.05rem;
+      line-height: 1.85;
+      color: #b5ab9b;
+    }
+
+    .origin-body p strong {
+      color: var(--white);
+      font-weight: 600;
+    }
+
+    .pull-quote {
+      border-left: 3px solid var(--red);
+      padding-left: 1.5rem;
+      font-size: 1.3rem;
+      line-height: 1.6;
+      color: var(--white);
+      font-style: italic;
+      font-weight: 300;
+    }
+
+    /* ── MISSION STRIP ── */
+    .mission-strip {
+      background: var(--red);
+      padding: 3rem;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .mission-strip-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 3rem;
+    }
+
+    .mission-strip h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(36px, 5vw, 64px);
+      line-height: 1;
+      flex-shrink: 0;
+      color: var(--black);
+    }
+
+    .mission-strip p {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: rgba(0,0,0,0.75);
+      max-width: 600px;
+    }
+
+    /* ── TEAM ── */
+    .team {
+      background: var(--black);
+    }
+
+    .team-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .team-heading {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(48px, 7vw, 100px);
+      line-height: 0.9;
+      margin-bottom: 4rem;
+      letter-spacing: -1px;
+    }
+
+    .team-heading span { color: var(--yellow); }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2px;
+    }
+
+    .team-card {
+      background: var(--gray);
+      padding: 2.5rem;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s ease;
+    }
+
+    .team-card:hover { background: #252525; }
+
+    .team-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 3px;
+      background: var(--yellow);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+
+    .team-card:hover::before { transform: scaleX(1); }
+
+    .card-number {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      color: var(--mid);
+      margin-bottom: 2rem;
+    }
+
+    .card-avatar {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: var(--mid);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem;
+      color: var(--yellow);
+      letter-spacing: 1px;
+    }
+
+    .card-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      line-height: 1;
+      letter-spacing: 0.5px;
+      margin-bottom: 0.3rem;
+    }
+
+    .card-role {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      color: var(--red);
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+
+    .card-bio {
+      font-size: 0.95rem;
+      line-height: 1.75;
+      color: #9a9080;
+    }
+
+    .card-interests {
+      margin-top: 1.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      padding: 0.3rem 0.7rem;
+      border: 1px solid var(--mid);
+      color: #9a9080;
+      text-transform: uppercase;
+      transition: all 0.2s ease;
+    }
+
+    .team-card:hover .tag {
+      border-color: var(--yellow);
+      color: var(--yellow);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--gray);
+      padding: 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-logo {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      color: var(--yellow);
+      text-transform: uppercase;
+    }
+
+    .footer-copy {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      color: var(--mid);
+      letter-spacing: 0.1em;
+    }
+
+    .footer-mission {
+      font-size: 0.85rem;
+      color: #6a6055;
+      font-style: italic;
+      max-width: 300px;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── NAV BAR ── */
+    .site-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(10,10,10,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--mid);
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      padding: 1rem 3rem;
+    }
+
+    .site-nav a {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--mid);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .site-nav a:hover { color: var(--yellow); }
+    .site-nav a.active { color: var(--white); }
+
+    /* ── POLICY ── */
+    .policy {
+      background: var(--black);
+      border-top: 1px solid var(--mid);
+    }
+
+    .policy-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .policy-heading {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(48px, 7vw, 100px);
+      line-height: 0.9;
+      margin-bottom: 1rem;
+      letter-spacing: -1px;
+    }
+
+    .policy-heading span { color: var(--red); }
+
+    .policy-intro {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: #9a9080;
+      max-width: 600px;
+      margin-bottom: 4rem;
+    }
+
+    .policy-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .policy-card {
+      background: var(--gray);
+      padding: 2.5rem 3rem;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 2rem;
+      align-items: start;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .policy-card:hover { background: #252525; }
+
+    .policy-card::after {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: var(--red);
+      transform: scaleY(0);
+      transform-origin: top;
+      transition: transform 0.4s ease;
+    }
+
+    .policy-card:hover::after,
+    .policy-card.open::after { transform: scaleY(1); }
+
+    .policy-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3rem;
+      color: var(--mid);
+      line-height: 1;
+      min-width: 3rem;
+      transition: color 0.3s ease;
+    }
+
+    .policy-card:hover .policy-num,
+    .policy-card.open .policy-num { color: var(--yellow); }
+
+    .policy-main { display: flex; flex-direction: column; gap: 0.5rem; }
+
+    .policy-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(1.4rem, 3vw, 2.2rem);
+      line-height: 1;
+      letter-spacing: 0.5px;
+    }
+
+    .policy-subtitle {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      color: var(--red);
+      text-transform: uppercase;
+    }
+
+    .policy-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease, opacity 0.4s ease;
+      opacity: 0;
+      grid-column: 2;
+    }
+
+    .policy-card.open .policy-body {
+      max-height: 400px;
+      opacity: 1;
+    }
+
+    .policy-body-inner {
+      padding-top: 1.2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .policy-body p {
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: #9a9080;
+    }
+
+    .policy-body p strong { color: var(--white); font-weight: 600; }
+
+    .policy-proposals {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .proposal-item {
+      display: flex;
+      align-items: baseline;
+      gap: 0.75rem;
+      font-size: 0.9rem;
+      color: #9a9080;
+      line-height: 1.6;
+    }
+
+    .proposal-item::before {
+      content: '→';
+      color: var(--yellow);
+      flex-shrink: 0;
+      font-size: 0.8rem;
+    }
+
+    .policy-toggle {
+      font-family: 'Space Mono', monospace;
+      font-size: 1.2rem;
+      color: var(--mid);
+      transition: color 0.3s ease, transform 0.3s ease;
+      display: flex;
+      align-items: center;
+      padding-top: 0.5rem;
+    }
+
+    .policy-card:hover .policy-toggle { color: var(--white); }
+    .policy-card.open .policy-toggle { transform: rotate(45deg); color: var(--red); }
+
+    .policy-cta {
+      margin-top: 4rem;
+      padding: 2.5rem;
+      border: 1px solid var(--mid);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .policy-cta p {
+      font-size: 1rem;
+      color: #9a9080;
+      max-width: 480px;
+      line-height: 1.7;
+    }
+
+    .policy-cta p strong { color: var(--white); }
+
+    .cta-badge {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.1em;
+      color: var(--black);
+      background: var(--yellow);
+      padding: 0.8rem 1.8rem;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .cta-badge:hover { background: var(--white); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .hero { padding: 1.5rem; }
+      section { padding: 4rem 1.5rem; }
+      .origin-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .origin-heading { position: static; }
+      .mission-strip-inner { flex-direction: column; gap: 1rem; }
+      footer { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── STICKY NAV ── -->
+<nav class="site-nav">
+  <a href="#about" class="active">About Us</a>
+  <a href="#policy">Policy Ideas</a>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero" id="about">
+  <nav>
+    <div class="logo">Unfiltered Forward</div>
+    <div class="nav-tag">Est. 2025 &nbsp;·&nbsp; Nonprofit</div>
+  </nav>
+
+  <div class="hero-content">
+    <div class="hero-label">About Us</div>
+    <h1>Speak<span>Freely.</span></h1>
+    <p class="hero-sub">
+      We are a nonprofit on a mission to expose censorship, defend free expression online, and push for bold new policies that protect your voice — from government overreach and big tech control alike.
+    </p>
+  </div>
+
+  <div class="hero-bottom">
+    <div class="stat">
+      <div class="stat-num">2025</div>
+      <div class="stat-label">Year Founded</div>
+    </div>
+    <div class="divider-v"></div>
+    <div class="stat">
+      <div class="stat-num">2</div>
+      <div class="stat-label">Young Founders</div>
+    </div>
+    <div class="divider-v"></div>
+    <div class="stat">
+      <div class="stat-num">1</div>
+      <div class="stat-label">Mission</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ORIGIN STORY ── -->
+<section class="origin">
+  <div class="origin-inner">
+    <div>
+      <div class="section-label">Origin Story</div>
+      <h2 class="origin-heading">How It <span>Started</span></h2>
+    </div>
+
+    <div class="origin-body reveal">
+      <p>
+        <strong>Unfiltered Forward was born from a simple, frustrating truth:</strong> that in the digital age, the ability to speak freely is not guaranteed — not by the platforms we use every day, and not even by the governments meant to protect us.
+      </p>
+      <p>
+        It started with two teenagers who noticed it. Scrolling through feeds, watching posts disappear, accounts silenced, ideas buried by algorithms with no explanation. They asked the question that adults had stopped asking: <em>why does this feel so wrong?</em>
+      </p>
+      <blockquote class="pull-quote">
+        "We are young enough to still believe that things can change — and old enough to do something about it."
+      </blockquote>
+      <p>
+        In 2025, <strong>Bhanusri Durbhakula</strong> and <strong>Leyla Bibb</strong> founded Unfiltered Forward with a conviction that free speech on social media isn't a privilege — it's a right worth fighting for. Their goal: to raise awareness about digital censorship and to put forward real, actionable policy ideas that protect every voice, everywhere.
+      </p>
+      <p>
+        We are just getting started. And we are not staying quiet.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ── MISSION STRIP ── -->
+<div class="mission-strip reveal">
+  <div class="mission-strip-inner">
+    <h2>Our Mission</h2>
+    <p>
+      To expose and combat digital censorship, advocate for robust free speech protections on social media platforms, and develop forward-thinking policy proposals that hold governments and big tech accountable to the people they serve.
+    </p>
+  </div>
+</div>
+
+<!-- ── TEAM ── -->
+<section class="team">
+  <div class="team-inner">
+    <div class="section-label">The Team</div>
+    <h2 class="team-heading reveal">The Voices <span>Behind It</span></h2>
+
+    <div class="team-grid">
+
+      <!-- Bhanusri -->
+      <div class="team-card reveal">
+        <div class="card-number">01 / Founder</div>
+        <div class="card-avatar">BD</div>
+        <div class="card-name">Bhanusri Durbhakula</div>
+        <div class="card-role">Founder</div>
+        <p class="card-bio">
+          At 13, Bhanusri already knows what it means to have a voice — and what it means when that voice gets filtered. As a social media user who has lived the algorithm firsthand, she launched Unfiltered Forward to turn personal frustration into lasting change. Her sharpness on the chessboard and her resilience on the tennis court are matched only by her precision in the way she thinks about policy and justice.
+        </p>
+        <div class="card-interests">
+          <span class="tag">Chess</span>
+          <span class="tag">Tennis</span>
+          <span class="tag">Cello</span>
+          <span class="tag">Free Speech</span>
+        </div>
+      </div>
+
+      <!-- Leyla -->
+      <div class="team-card reveal">
+        <div class="card-number">02 / Co-Founder</div>
+        <div class="card-avatar">LB</div>
+        <div class="card-name">Leyla Bibb</div>
+        <div class="card-role">Co-Founder</div>
+        <p class="card-bio">
+          Leyla is 14, fearless, and has been advocating for justice her entire life. A passionate champion for women's rights and African-American rights, she understands deeply that silencing voices is never random — it is political. She brings that urgency and moral clarity to Unfiltered Forward, fighting to ensure that the communities most often censored are the ones most fiercely protected.
+        </p>
+        <div class="card-interests">
+          <span class="tag">Women's Rights</span>
+          <span class="tag">Civil Rights</span>
+          <span class="tag">Dance</span>
+          <span class="tag">Advocacy</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── POLICY IDEAS ── -->
+<section class="policy" id="policy">
+  <div class="policy-inner">
+    <div class="section-label">New Policy Ideas</div>
+    <h2 class="policy-heading reveal">Bold Ideas.<br><span>Real Change.</span></h2>
+    <p class="policy-intro reveal">
+      Awareness alone isn't enough. Unfiltered Forward puts forward concrete, actionable policy proposals to protect free expression online — from the platforms that host us and the governments that govern us.
+    </p>
+
+    <div class="policy-cards">
+
+      <!-- Policy 1 -->
+      <div class="policy-card reveal" onclick="togglePolicy(this)">
+        <div class="policy-num">01</div>
+        <div class="policy-main">
+          <div class="policy-subtitle">Transparency &amp; Accountability</div>
+          <div class="policy-title">The Platform Transparency Act</div>
+          <div class="policy-body">
+            <div class="policy-body-inner">
+              <p>Social media companies make millions of content moderation decisions every day — and users almost never find out why their post was removed, their account restricted, or their reach quietly throttled. <strong>That has to change.</strong></p>
+              <p>We propose requiring all major platforms to publish clear, accessible data on censorship actions — and to give users real explanations when their content is removed.</p>
+              <div class="policy-proposals">
+                <div class="proposal-item">Mandatory quarterly "Censorship Transparency Reports" disclosing total content removals, categories, and appeal outcomes.</div>
+                <div class="proposal-item">Require platforms to notify users with a specific reason within 48 hours of any content removal or account restriction.</div>
+                <div class="proposal-item">Create an independent oversight board with public representation to audit platform moderation data annually.</div>
+                <div class="proposal-item">Establish a public, searchable database of platform content policies so users know the rules before they post.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="policy-toggle">+</div>
+      </div>
+
+      <!-- Policy 2 -->
+      <div class="policy-card reveal" onclick="togglePolicy(this)">
+        <div class="policy-num">02</div>
+        <div class="policy-main">
+          <div class="policy-subtitle">Algorithmic Rights</div>
+          <div class="policy-title">The Anti-Suppression Act</div>
+          <div class="policy-body">
+            <div class="policy-body-inner">
+              <p>Platforms don't just delete content — they quietly bury it. Shadow banning, reduced reach, and algorithmic down-ranking can silence voices just as effectively as outright removal, with no notice and no recourse. <strong>This invisible censorship must be addressed.</strong></p>
+              <div class="policy-proposals">
+                <div class="proposal-item">Ban undisclosed shadow banning — if a platform reduces a user's reach, the user must be informed.</div>
+                <div class="proposal-item">Require platforms to offer a fully chronological, algorithm-free feed as a default user option.</div>
+                <div class="proposal-item">Give users the legal right to request an explanation for any significant, unexplained drop in reach or engagement.</div>
+                <div class="proposal-item">Prohibit algorithmic suppression based on political viewpoint, religion, or protected identity characteristics.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="policy-toggle">+</div>
+      </div>
+
+      <!-- Policy 3 -->
+      <div class="policy-card reveal" onclick="togglePolicy(this)">
+        <div class="policy-num">03</div>
+        <div class="policy-main">
+          <div class="policy-subtitle">Content Moderation Reform</div>
+          <div class="policy-title">The Viewpoint Neutrality Standard</div>
+          <div class="policy-body">
+            <div class="policy-body-inner">
+              <p>Content moderation must be consistent, fair, and blind to political leaning. When platforms apply rules differently based on who is speaking — rather than what is being said — they stop being neutral platforms and start being political actors. <strong>We propose a neutrality standard with teeth.</strong></p>
+              <div class="policy-proposals">
+                <div class="proposal-item">Require platforms to apply content moderation rules consistently across all political viewpoints with regular audits to verify compliance.</div>
+                <div class="proposal-item">Create an independent appeals process where users can challenge politically motivated removals before a neutral third party.</div>
+                <div class="proposal-item">Establish civil penalties for platforms that demonstrate a pattern of viewpoint-based discrimination in moderation decisions.</div>
+                <div class="proposal-item">Mandate that AI moderation tools be tested for political bias before deployment and results published publicly.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="policy-toggle">+</div>
+      </div>
+
+    </div>
+
+    <div class="policy-cta reveal">
+      <p><strong>Have a policy idea?</strong> Unfiltered Forward is always looking for bold new proposals. We believe the best ideas come from the people most affected by censorship — that means you.</p>
+      <div class="cta-badge">Submit Your Idea →</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-logo">Unfiltered Forward</div>
+  <p class="footer-mission">Every voice deserves to be heard. Every idea deserves a chance.</p>
+  <div class="footer-copy">© 2025 Unfiltered Forward · All Rights Reserved</div>
+</footer>
+
+<script>
+  // Policy accordion
+  function togglePolicy(card) {
+    const isOpen = card.classList.contains('open');
+    document.querySelectorAll('.policy-card').forEach(c => c.classList.remove('open'));
+    if (!isOpen) card.classList.add('open');
+  }
+
+  // Nav active state on scroll
+  const sections = [
+    { id: 'about', el: document.querySelector('.hero') },
+    { id: 'policy', el: document.querySelector('#policy') }
+  ];
+  const navLinks = document.querySelectorAll('.site-nav a');
+  window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY + 120;
+    sections.forEach(({ id, el }) => {
+      if (!el) return;
+      if (scrollY >= el.offsetTop && scrollY < el.offsetTop + el.offsetHeight) {
+        navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + id));
+      }
+    });
+  });
+
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 100);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
